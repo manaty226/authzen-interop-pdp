@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"log/slog"
+	"manaty226/authzen-interop-pdp-casbin/pip"
 	"manaty226/authzen-interop-pdp-casbin/server"
 
 	"github.com/casbin/casbin/v2"
@@ -26,15 +27,6 @@ func NewCasbinHandler() server.Handler {
 	}
 }
 
-// psuedo PIP store for the purpose to map the user subject to that email address
-var idStore = map[string]string{
-	"CiRmZDA2MTRkMy1jMzlhLTQ3ODEtYjdiZC04Yjk2ZjVhNTEwMGQSBWxvY2Fs": "rick@the-citadel.com",
-	"CiRmZDM2MTRkMy1jMzlhLTQ3ODEtYjdiZC04Yjk2ZjVhNTEwMGQSBWxvY2Fs": "beth@the-smiths.com",
-	"CiRmZDE2MTRkMy1jMzlhLTQ3ODEtYjdiZC04Yjk2ZjVhNTEwMGQSBWxvY2Fs": "morty@the-citadel.com",
-	"CiRmZDI2MTRkMy1jMzlhLTQ3ODEtYjdiZC04Yjk2ZjVhNTEwMGQSBWxvY2Fs": "summer@the-smiths.com",
-	"CiRmZDQ2MTRkMy1jMzlhLTQ3ODEtYjdiZC04Yjk2ZjVhNTEwMGQSBWxvY2Fs": "jerry@the-smiths.com",
-}
-
 // this is used for casbin ABAC object policy
 type object struct {
 	ID      string
@@ -42,7 +34,7 @@ type object struct {
 }
 
 func (h casbinHandler) EvaluateAccess(ctx context.Context, req *server.EvaluateAccessReq) (*server.EvaluateAccessOK, error) {
-	sub := idStore[req.Subject.ID]
+	sub := pip.Users[req.Subject.ID]
 	obj := object{
 		ID:      fmt.Sprintf("%s::%s", req.Resource.Type, req.Resource.ID),
 		OwnerID: req.Resource.Properties.Value.OwnerID.Value,

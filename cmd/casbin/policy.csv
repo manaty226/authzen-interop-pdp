@@ -1,9 +1,9 @@
 p,viewer,user::*,can_read_user,true
-p,viewer,todo::*,can_read_todo,(r.obj.OwnerID == r.sub)
+p,viewer,todo::*,can_read_todo,(r.obj.OwnerID == r.sub.ID)
 p,viewer,todo::*,can_read_todos,true
 p,editor,todo::*,can_create_todo,true
-p,editor,todo::*,can_update_todo,r.obj.OwnerID == r.sub
-p,editor,todo::*,can_delete_todo,r.obj.OwnerID == r.sub
+p,editor,todo::*,can_update_todo,r.obj.OwnerID == r.sub.ID
+p,editor,todo::*,can_delete_todo,r.obj.OwnerID == r.sub.ID
 p,admin,todo::*,can_delete_todo,true
 p,evil_genius,todo::*,can_update_todo,true
 
