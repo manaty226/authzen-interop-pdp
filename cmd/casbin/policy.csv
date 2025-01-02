@@ -7,14 +7,14 @@ p,editor,todo::*,can_delete_todo,r.obj.OwnerID == r.sub.ID
 p,admin,todo::*,can_delete_todo,true
 p,evil_genius,todo::*,can_update_todo,true
 
-g,editor,viewer
-g,admin,editor
-g,evil_genius,editor
+g,editor,viewer,,
+g,admin,editor,,
+g,evil_genius,editor,,
 
-g,rick@the-citadel.com,admin
-g,rick@the-citadel.com,evil_genius
-g,beth@the-smiths.com,viewer
-g,morty@the-citadel.com,editor
-g,summer@the-smiths.com,editor
-g,jerry@the-smiths.com,viewer
+g,rick@the-citadel.com,admin,,
+g,rick@the-citadel.com,evil_genius,,
+g,beth@the-smiths.com,viewer,,
+g,morty@the-citadel.com,editor,,
+g,summer@the-smiths.com,editor,,
+g,jerry@the-smiths.com,viewer,,
 
